@@ -16,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtCompany;
 @property (weak, nonatomic) IBOutlet UITextField *txtTel;
 @property (strong, nonatomic) Contact *editContact;
+@property (weak, nonatomic) UITextField *activeField;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+
+- (IBAction)textFieldDoneEditing:(id)sender;
 
 - (IBAction)doDelete:(id)sender;
 
