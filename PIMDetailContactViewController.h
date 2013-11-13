@@ -16,6 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLastName;
 @property (weak, nonatomic) IBOutlet UILabel *lblCompany;
 @property (weak, nonatomic) IBOutlet UILabel *lblTel;
-- (IBAction)share:(id)sender;
 
 @end

@@ -59,11 +59,4 @@
     }
 }
 
-- (IBAction)share:(id)sender {
-    NSArray *items = @[lblContent.text];
-    UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-    [shareController setValue:lblTitle.text forKey:@"subject"];
-    
-    [self presentViewController:shareController animated:YES completion:nil];
-}
 @end
