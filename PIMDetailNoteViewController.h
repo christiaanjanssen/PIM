@@ -14,5 +14,5 @@
 @property (nonatomic, strong) Note *inNote;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UITextView *lblContent;
-
+- (IBAction)share:(id)sender ;
 @end

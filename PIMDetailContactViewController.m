@@ -59,4 +59,13 @@
     lblTel.text = [inContact tel];
 }
 
+- (IBAction)share:(id)sender {
+    NSArray *items = @[inContact.firstName, inContact.lastName, inContact.company, inContact.tel];
+    UIActivityViewController *shareController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+    [shareController setValue:[NSString stringWithFormat:@"Contact info for: %@", inContact.fullName] forKey:@"subject"];
+    
+    [self presentViewController:shareController animated:YES completion:nil];
+}
+
+
 @end
