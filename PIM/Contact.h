@@ -14,6 +14,7 @@
 @property NSString *lastName;
 @property NSString *company;
 @property NSString *tel;
+@property NSString *image;
 
 - (id)initWithFirstName:(NSString *)fName andLastName:(NSString *)lName andCompany:(NSString *)iCompany andTel:(NSString *)iTel;
 - (NSString *)fullName;

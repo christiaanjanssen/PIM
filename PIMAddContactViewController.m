@@ -10,6 +10,7 @@
 #import "PIMContactListViewController.h"
 #import "Contact.h"
 
+
 @interface PIMAddContactViewController ()
 
 @end
@@ -18,6 +19,7 @@
 
 @synthesize scrollview;
 @synthesize activeField;
+@synthesize imageview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -112,6 +114,20 @@
 - (void)tapped
 {
     [self.view endEditing:YES];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    if ([touch view] == imageview)
+    {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+        imagePicker.allowsEditing = YES;
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
 }
 
 @end

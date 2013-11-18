@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 
-@interface PIMAddContactViewController : UIViewController
+@interface PIMAddContactViewController : UIViewController <UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFirst;
 @property (weak, nonatomic) IBOutlet UITextField *txtLast;
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtTel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 @property (weak, nonatomic) UITextField *activeField;
+@property (weak, nonatomic) IBOutlet UIImageView *imageview;
 - (IBAction)textFieldDoneEditing:(id)sender;
 
 
