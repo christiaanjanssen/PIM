@@ -8,16 +8,20 @@
 
 #import "PIMEditContactViewController.h"
 #import "PIMDetailContactViewController.h"
+#import "ImageReader.h"
 
 @interface PIMEditContactViewController ()
 
 @end
 
-@implementation PIMEditContactViewController
+@implementation PIMEditContactViewController{
+    NSString *imageName;
+}
 
 @synthesize editContact;
 @synthesize scrollview;
 @synthesize activeField;
+@synthesize imageview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,10 +39,17 @@
     self.txtLast.text = editContact.lastName;
     self.txtCompany.text = editContact.company;
     self.txtTel.text = editContact.tel;
+    if([editContact image] != nil){
+        [imageview setImage:[ImageReader ReadImage:[editContact image]]];
+    }
     
     UITapGestureRecognizer *tapgestures = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     tapgestures.cancelsTouchesInView = NO;
     [scrollview addGestureRecognizer:tapgestures];
+    
+    UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+    imageTap.numberOfTapsRequired = 1;
+    [imageview addGestureRecognizer:imageTap];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -58,6 +69,11 @@
     editContact.lastName = self.txtLast.text;
     editContact.company = self.txtCompany.text;
     editContact.tel = self.txtTel.text;
+    if(imageName != nil){
+        editContact.image = imageName;
+    }
+    
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -130,6 +146,42 @@
 {
     [self.view endEditing:YES];
 }
+
+- (void)imageTapped
+{
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSDate *now = [NSDate date];
+    NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[[NSString alloc] initWithFormat:@"%@.png", now]];
+    
+    NSString *imageType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([imageType isEqualToString:@"public.image"]) {
+        if([editContact image] != nil){
+            [ImageReader DeleteImage:[editContact image]];
+        }
+        
+        
+        UIImage *editedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        imageName = [[NSString alloc] initWithFormat:@"%@.png", now];
+        NSData *webData = UIImagePNGRepresentation(editedImage);
+        [webData writeToFile:imagePath atomically:YES];
+        [imageview setImage:editedImage];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 
 @end

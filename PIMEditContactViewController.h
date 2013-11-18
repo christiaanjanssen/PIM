@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "Contact.h"
 
-@interface PIMEditContactViewController : UIViewController <UIAlertViewDelegate>
+@interface PIMEditContactViewController : UIViewController <UIAlertViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFirst;
 @property (weak, nonatomic) IBOutlet UITextField *txtLast;
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) Contact *editContact;
 @property (weak, nonatomic) UITextField *activeField;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
+@property (weak, nonatomic) IBOutlet UIImageView *imageview;
 
 - (IBAction)textFieldDoneEditing:(id)sender;
 

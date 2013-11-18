@@ -16,7 +16,7 @@
 @property NSString *tel;
 @property NSString *image;
 
-- (id)initWithFirstName:(NSString *)fName andLastName:(NSString *)lName andCompany:(NSString *)iCompany andTel:(NSString *)iTel;
+- (id)initWithFirstName:(NSString *)fName andLastName:(NSString *)lName andCompany:(NSString *)iCompany andTel:(NSString *)iTel andImage:(NSString *)img;
 - (NSString *)fullName;
 
 @end

@@ -9,6 +9,7 @@
 #import "PIMContactListViewController.h"
 #import "Contact.h"
 #import "PIMDetailContactViewController.h"
+#import "ImageReader.h"
 
 @interface PIMContactListViewController ()
 
@@ -88,6 +89,10 @@
 
 - (IBAction)unwindAndDeleteToList:(UIStoryboardSegue *)unwindSegue
 {
+    Contact *toDel = [self.contacts objectAtIndex:editRow];
+    if(toDel.image != nil){
+        [ImageReader DeleteImage:toDel.image];
+    }
     [self.contacts removeObjectAtIndex:editRow];
     [self.tableview reloadData];
     [self saveContacts];
@@ -121,6 +126,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Contact *toDel = [self.contacts objectAtIndex:indexPath.row];
+        if(toDel.image != nil){
+            [ImageReader DeleteImage:toDel.image];
+        }
         [self.contacts removeObjectAtIndex:indexPath.row];
         [self.tableview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
         

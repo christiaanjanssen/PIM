@@ -9,6 +9,7 @@
 #import "PIMDetailContactViewController.h"
 #import "PIMContactListViewController.h"
 #import "PIMEditContactViewController.h"
+#import "ImageReader.h"
 
 @interface PIMDetailContactViewController ()
 
@@ -35,6 +36,9 @@
     lblLastName.text = [inContact lastName];
     lblCompany.text = [inContact company];
     lblTel.text = [inContact tel];
+        if([inContact image] != nil){
+        [self.imageview setImage:[ImageReader ReadImage:[inContact image]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,6 +61,9 @@
     lblLastName.text = [inContact lastName];
     lblCompany.text = [inContact company];
     lblTel.text = [inContact tel];
+    if([inContact image] != nil){
+        [self.imageview setImage:[ImageReader ReadImage:[inContact image]]];
+    }
 }
 
 - (IBAction)share:(id)sender {

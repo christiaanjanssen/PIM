@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0035C584183A68C5000C5EE9 /* ImageReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0035C583183A68C5000C5EE9 /* ImageReader.m */; };
 		00431F471826ACA200E43B64 /* PIMEditContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00431F461826ACA200E43B64 /* PIMEditContactViewController.m */; };
 		00431F4B1826CBCF00E43B64 /* PIMAddContactViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00431F4A1826CBCF00E43B64 /* PIMAddContactViewController.m */; };
 		0046082D182556D4004FFA3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0046082C182556D4004FFA3E /* Foundation.framework */; };
@@ -44,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0035C582183A68C5000C5EE9 /* ImageReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageReader.h; sourceTree = "<group>"; };
+		0035C583183A68C5000C5EE9 /* ImageReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageReader.m; sourceTree = "<group>"; };
 		00431F451826ACA200E43B64 /* PIMEditContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIMEditContactViewController.h; sourceTree = "<group>"; };
 		00431F461826ACA200E43B64 /* PIMEditContactViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIMEditContactViewController.m; sourceTree = "<group>"; };
 		00431F491826CBCF00E43B64 /* PIMAddContactViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIMAddContactViewController.h; sourceTree = "<group>"; };
@@ -108,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0035C581183A688C000C5EE9 /* Reader */ = {
+			isa = PBXGroup;
+			children = (
+				0035C582183A68C5000C5EE9 /* ImageReader.h */,
+				0035C583183A68C5000C5EE9 /* ImageReader.m */,
+			);
+			name = Reader;
+			sourceTree = "<group>";
+		};
 		00431F481826ACAE00E43B64 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 		00460820182556D4004FFA3E = {
 			isa = PBXGroup;
 			children = (
+				0035C581183A688C000C5EE9 /* Reader */,
 				069DFE4C182A332700E6DFB2 /* Notes */,
 				00431F481826ACAE00E43B64 /* Contacts */,
 				00460832182556D4004FFA3E /* PIM */,
@@ -335,6 +348,7 @@
 				0046083D182556D4004FFA3E /* PIMAppDelegate.m in Sources */,
 				069DFE55182A3E5800E6DFB2 /* PIMDetailNoteViewController.m in Sources */,
 				069DFE4F182A353200E6DFB2 /* Note.m in Sources */,
+				0035C584183A68C5000C5EE9 /* ImageReader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

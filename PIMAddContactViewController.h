@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 
-@interface PIMAddContactViewController : UIViewController <UIImagePickerControllerDelegate>
+@interface PIMAddContactViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *txtFirst;
 @property (weak, nonatomic) IBOutlet UITextField *txtLast;

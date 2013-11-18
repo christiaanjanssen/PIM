@@ -15,7 +15,10 @@
 
 @end
 
-@implementation PIMAddContactViewController
+@implementation PIMAddContactViewController{
+    NSString *imageName;
+    UIImage *tempImage;
+}
 
 @synthesize scrollview;
 @synthesize activeField;
@@ -34,10 +37,15 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+
     
     UITapGestureRecognizer *tapgestures = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped)];
     tapgestures.cancelsTouchesInView = NO;
     [scrollview addGestureRecognizer:tapgestures];
+    
+    UITapGestureRecognizer *imageTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageTapped)];
+    imageTap.numberOfTapsRequired = 1;
+    [imageview addGestureRecognizer:imageTap];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,8 +62,21 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"addToList"]){
+        
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSDate *now = [NSDate date];
+        NSString *imagePath = [documentsDirectory stringByAppendingPathComponent:[[NSString alloc] initWithFormat:@"%@.png", now]];
+        
+        if(tempImage != nil){
+            imageName = [[NSString alloc] initWithFormat:@"%@.png", now];
+            NSData *webData = UIImagePNGRepresentation(tempImage);
+            [webData writeToFile:imagePath atomically:YES];
+        }
+        
         PIMContactListViewController *dest = segue.destinationViewController;
-        dest.addContact = [[Contact alloc] initWithFirstName:self.txtFirst.text andLastName:self.txtLast.text andCompany:self.txtCompany.text andTel:self.txtTel.text];
+        dest.addContact = [[Contact alloc] initWithFirstName:self.txtFirst.text andLastName:self.txtLast.text andCompany:self.txtCompany.text andTel:self.txtTel.text andImage:imageName];
     }
 }
 
@@ -116,18 +137,26 @@
     [self.view endEditing:YES];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)imageTapped
 {
-    UITouch *touch = [touches anyObject];
-    if ([touch view] == imageview)
-    {
+    
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = @[(NSString *)kUTTypeImage];
         imagePicker.allowsEditing = YES;
         [self presentViewController:imagePicker animated:YES completion:nil];
+    
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *imageType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([imageType isEqualToString:@"public.image"]) {
+        tempImage = [info objectForKey:UIImagePickerControllerEditedImage];
+        [imageview setImage:tempImage];
     }
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
